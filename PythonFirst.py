@@ -10,6 +10,7 @@ b = 3.1412926
 print(math.floor(b))
 
 name = "ada lovelace"
+<<<<<<< Updated upstream
 print(name.title())        # title()以首字母大写的方式显示每个单词，即将每个单词的首字母都改为大写。
 
 print(name.upper())        # upper()将字符串改为全部大写
@@ -21,6 +22,21 @@ favorite_language = ' python '
 print(favorite_language.rstrip())         # rstrip()删除字符串末尾的空白
 
 print(favorite_language.lstrip())         # lstrip()删除字符串开头的空白
+=======
+print(name.title())        # title()������ĸ��д�ķ�ʽ��ʾÿ�����ʣ�����ÿ�����ʵ�����ĸ����Ϊ��д��
+
+print(name.upper())        # upper()���ַ�����Ϊȫ����д
+
+print(name.lower())        # lower()���ַ�����Ϊȫ��Сд
+
+favorite_language = ' python '
+
+print(favorite_language.rstrip())         # rstrip()ɾ���ַ���ĩβ�Ŀհ�
+
+print(favorite_language.lstrip())         # lstrip()ɾ���ַ�����ͷ�Ŀհ�
+
+print(favorite_language.strip())          # strip()ɾ���ַ������˵Ŀհ�
+>>>>>>> Stashed changes
 
 print(favorite_language.strip())          # strip()删除字符串两端的空白
 
@@ -44,6 +60,7 @@ msg = f"Hello, {knames[2].title()}!"
 print(msg)
 
 #'''
+<<<<<<< Updated upstream
 #    f-string，亦称为格式化字符串常量（formatted string literals），
 #    是python3.6新引入的一种字符串格式化方法，该方法源于pep 498 – 
 #    literal string interpolation，主要目的是使格式化字符串的操作更
@@ -57,7 +74,6 @@ print(msg)
 #    f-string在功能方面不逊于传统的%-formatting语句和str.format()函数，
 #    同时性能又优于二者，且使用起来也更加简洁明了，因此对于python3.6及
 #    以后的版本，推荐使用f-string进行字符串格式化。
-#'''
 
 
 list = [10,20,30,40,50,60]
