@@ -1,4 +1,4 @@
-import math
+﻿import math
 import msvcrt
 import this
 from copy import copy
@@ -10,17 +10,21 @@ b = 3.1412926
 print(math.floor(b))
 
 name = "ada lovelace"
+
 print(name.title())        # title()以首字母大写的方式显示每个单词，即将每个单词的首字母都改为大写。
 
 print(name.upper())        # upper()将字符串改为全部大写
 
 print(name.lower())        # lower()将字符串改为全部小写
 
+
 favorite_language = ' python '
 
 print(favorite_language.rstrip())         # rstrip()删除字符串末尾的空白
 
 print(favorite_language.lstrip())         # lstrip()删除字符串开头的空白
+
+print(favorite_language.strip())          # strip()删除字符串两端的空白
 
 print(favorite_language.strip())          # strip()删除字符串两端的空白
 
@@ -57,7 +61,6 @@ print(msg)
 #    f-string在功能方面不逊于传统的%-formatting语句和str.format()函数，
 #    同时性能又优于二者，且使用起来也更加简洁明了，因此对于python3.6及
 #    以后的版本，推荐使用f-string进行字符串格式化。
-#'''
 
 
 list = [10,20,30,40,50,60]
@@ -124,7 +127,37 @@ popped_motorcycle = motorcycles.pop()
 print(motorcycles)
 print(popped_motorcycle)
 
-#如果你不确定该使用del语句还是pop()方法，下面是一个简单的判断标准：如果你要从列表
-#中删除一个元素，且不再以任何方式使用它，就使用del语句；如果你要在删除元素后还能继续
-#使用它，就使用方法pop()。
+#   如果你不确定该使用del语句还是pop()方法，下面是一个简单的判断标准：如果你要从列表
+#   中删除一个元素，且不再以任何方式使用它，就使用del语句；如果你要在删除元素后还能继续
+#   使用它，就使用方法pop()。
+
+#   有时候，你不知道要从列表中删除的值所处的位置。如果你只知道要删除的元素的值，可使用方法remove()。
+motorcycles = ['honda', 'yamaha', 'suzuki', 'ducati']
+print(motorcycles)
+motorcycles.remove('ducati')
+print(motorcycles)
+
+#   使用remove()从列表中删除元素时，也可接着使用它的值。下面删除值'ducati'，并打印一条消息，指出要将其从列表中删除的原因：
+motorcycles = ['honda', 'yamaha', 'suzuki', 'ducati']
+print(motorcycles)
+too_expensive = 'ducati'
+motorcycles.remove(too_expensive)
+print(motorcycles)
+print("\nA " + too_expensive.title() + " is too expensive for me.")
+
+#   注意：方法remove()只删除第一个指定的值。如果要删除的值可能在列表中出现多次，就需要
+#   使用循环来判断是否删除了所有这样的值。
+
+
+#   Python方法sort()让你能够较为轻松地对列表进行排序。假设你有一个汽车列表，并要让其
+#   中的汽车按字母顺序排列。为简化这项任务，我们假设该列表中的所有值都是小写的。
+cars = ['bmw', 'audi', 'toyota', 'subaru']
+print(cars)
+cars.sort()
+print(cars)
+#   方法sort()永久性地修改了列表元素的排列顺序。现在，汽车是按字母顺序排列的，再也无法恢复到原来的排列顺序。
+
+#   还可以按与字母顺序相反的顺序排列列表元素，为此，只需向sort()方法传递参数reverse=True。
+cars.sort(reverse=True)
+print(cars)
 
