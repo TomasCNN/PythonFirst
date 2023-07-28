@@ -161,3 +161,40 @@ print(cars)
 cars.sort(reverse=True)
 print(cars)
 
+#   要保留列表元素原来的排列顺序，同时以特定的顺序呈现它们，可使用函数sorted()。函数
+#   sorted()让你能够按特定顺序显示列表元素，同时不影响它们在列表中的原始排列顺序。
+
+
+cars = ['bmw', 'audi', 'toyota', 'subaru']
+
+print("Here is the original list:")
+print(cars)
+
+print("\nHere is the sorted list:")
+print(sorted(cars))
+
+print("\nHere is the original list again:")
+print(cars)
+
+#   注意，调用函数sorted()后，列表元素的排列顺序并没有变。如果你要按与字母顺序相反的顺序显示列表，也可向函数sorted()传递参数reverse = True。
+
+#   在并非所有的值都是小写时，按字母顺序排列列表要复杂些。决定排列顺序时，有多种解读大写字母的方式，要指定准确的排列顺序，可能比我们这里所做的要复杂。
+
+#   要反转列表元素的排列顺序，可使用方法reverse()。假设汽车列表是按购买时间排列的，可轻松地按相反的顺序排列其中的汽车：
+
+cars = ['bmw', 'audi', 'toyota', 'subaru']
+print(cars)
+cars.reverse()
+print(cars)
+
+#   reverse()不是指按与字母顺序相反的顺序排列列表元素，而只是反转列表元素的排列顺序：
+#   方法reverse()永久性地修改列表元素的排列顺序，但可随时恢复到原来的排列顺序，为此只需对列表再次调用reverse()即可。
+
+#   使用函数len()可快速获悉列表的长度。在下面的示例中，列表包含4个元素，因此其长度为4：
+
+cars = ['bmw', 'audi', 'toyota', 'subaru']
+print(len(cars))
+
+#   在你需要完成如下任务时，len()很有用：确定还有多少个外星人未被射杀，需要管理多少项可视化数据，网站有多少注册用户等。
+#   循环这种概念很重要，因为它是让计算机自动完成重复工作的常见方式之一。
+
