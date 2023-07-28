@@ -24,6 +24,20 @@ print(favorite_language.rstrip())         # rstrip()删除字符串末尾的空�
 
 print(favorite_language.lstrip())         # lstrip()删除字符串开头的空白
 
+print(name.title())        # title()������ĸ��д�ķ�ʽ��ʾÿ�����ʣ�����ÿ�����ʵ�����ĸ����Ϊ��д��
+
+print(name.upper())        # upper()���ַ�����Ϊȫ����д
+
+print(name.lower())        # lower()���ַ�����Ϊȫ��Сд
+
+favorite_language = ' python '
+
+print(favorite_language.rstrip())         # rstrip()ɾ���ַ���ĩβ�Ŀհ�
+
+print(favorite_language.lstrip())         # lstrip()ɾ���ַ�����ͷ�Ŀհ�
+
+print(favorite_language.strip())          # strip()ɾ���ַ������˵Ŀհ�
+
 print(favorite_language.strip())          # strip()删除字符串两端的空白
 
 print(favorite_language.strip())          # strip()删除字符串两端的空白
