@@ -107,6 +107,15 @@ print(msg)
 #    同时性能又优于二者，且使用起来也更加简洁明了，因此对于python3.6及
 #    以后的版本，推荐使用f-string进行字符串格式化。
 
+'''
+    list操作
+    append()
+    insert()
+    pop()
+    del()
+    remove()
+'''
+
 
 list = [10,20,30,40,50,60]
 print(list)
@@ -422,6 +431,77 @@ for i in range(0,4):
 
 
 
+
+######################################################################################################################################################################################################
+#   嘉宾名单：如果你可以邀请任何人一起共进晚餐（无论是在世的还是故去的），你会邀请哪些人？请创建一个列表，其中包含至少3 个你想邀请的人；然后，使用这个列表打印消息，邀请这些人来与你共进晚餐。
+
+Guest = ['ZhanSan','LiSi','WangWu','HouLiu']
+
+#   方法一：
+print('Dear ' + str(Guest[0]) + ', would you like to eat dinner with me tonight!')
+print('Dear ' + str(Guest[1]) + ', would you like to eat dinner with me tonight!')
+print('Dear ' + str(Guest[2]) + ', would you like to eat dinner with me tonight!')
+print('Dear ' + str(Guest[3]) + ', would you like to eat dinner with me tonight!')
+
+#   方法二：
+for i in range(0,4):
+    print('Dear ' + str(Guest[i]) + ', would you like to eat dinner with me tonight!')
+
+######################################################################################################################################################################################################
+
+
+
+
+######################################################################################################################################################################################################
+#   修改嘉宾名单：你刚得知有位嘉宾无法赴约，因此需要另外邀请一位嘉宾。以完成练习上题时编写的程序为基础，
+#   在程序末尾添加一条print 语句，指出哪位嘉宾无法赴约。
+#   修改嘉宾名单，将无法赴约的嘉宾的姓名替换为新邀请的嘉宾的姓名。
+#   再次打印一系列消息，向名单中的每位嘉宾发出邀请。
+
+Guest = ['ZhanSan','LiSi','WangWu','HouLiu']
+Lost_G = 'WangWu'
+
+#   删除一位贵宾
+#   方法一：
+Guest.pop(2)
+print(Guest)
+Guest.insert(2,'WangWu')  # 插入一位贵宾
+print(Guest)
+
+
+#   方法二：
+del(Guest[2])
+print(Guest)
+
+
+#   在列表末尾添加一位贵宾
+Guest.append('WuQi')
+
+print('I\'m sorry to hear that ' + Lost_G + '\'s grandpa is died , so he can\'t jion us to eat dinner tonight!')
+
+
+#   方法一：
+print('Dear ' + str(Guest[0]) + ', would you like to eat dinner with me tonight!')
+print('Dear ' + str(Guest[1]) + ', would you like to eat dinner with me tonight!')
+print('Dear ' + str(Guest[2]) + ', would you like to eat dinner with me tonight!')
+print('Dear ' + str(Guest[3]) + ', would you like to eat dinner with me tonight!')
+
+#   方法二：
+for i in range(0,4):
+    print('Dear ' + str(Guest[i]) + ', would you like to eat dinner with me tonight!')
+
+######################################################################################################################################################################################################
+
+
+
+#   在Python中，字典是一系列键—值对。每个键都与一个值相关联，你可以使用键来访问与之相关联的值。
+#   与键相关联的值可以是数字、字符串、列表乃至字典。事实上，可将任何Python对象用作字典中的值。
+#   键—值对是两个相关联的值。指定键时，Python将返回与之相关联的值。键和值之间用冒号分隔，
+#   而键—值对之间用逗号分隔。在字典中，你想存储多少个键—值对都可以。
+
+#   要获取与键相关联的值，可依次指定字典名和放在方括号内的键，如下所示：
+alien_0 = {'color': 'green'}
+print(alien_0['color'])
 
 
 
