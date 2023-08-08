@@ -504,6 +504,31 @@ alien_0 = {'color': 'green'}
 print(alien_0['color'])
 
 
+#   字典是一种动态结构，可随时在其中添加键—值对。要添加键—值对，可依次指定字典名、用方括号括起的键和相关联的值。
+#   使用字典来存储用户提供的数据或在编写能自动生成大量键—值对的代码时，通常都需要先定义一个空字典。
+
+#   要修改字典中的值，可依次指定字典名、用方括号括起的键以及与该键相关联的新值。
+
+
+alien_0 = {'x_position': 0, 'y_position': 25, 'speed': 'medium'}
+print("Original x-position: " + str(alien_0['x_position']))
+
+# 向右移动外星人
+# 据外星人当前速度决定将其移动多远
+
+if alien_0['speed'] == 'slow':
+    x_increment = 1
+elif alien_0['speed'] == 'medium':
+    x_increment = 2
+else:
+    # 这个外星人的速度一定很快
+    x_increment = 3
+    # 新位置等于老位置加上增量
+alien_0['x_position'] = alien_0['x_position'] + x_increment
+print("New x-position: " + str(alien_0['x_position']))
+
+#   通过修改外星人字典中的值，可改变外星人的行为。
+
 
 
 
