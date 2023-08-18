@@ -1211,6 +1211,8 @@ completed_models = []
 
 print_models(unprinted_designs, completed_models)
 show_completed_models(completed_models)
+print(unprinted_designs)
+print(completed_models)
 
 #   首先，我们定义了函数print_models()，它包含两个形参：一个需要打印的设计列表和一个打印好的模型列表。
 #   给定这两个列表，这个函数模拟打印每个设计的过程：将设计逐个地从未打印的设计列表中取出， 并加入到打印好的模型列表中。接着， 我们定义了函数
@@ -1234,7 +1236,177 @@ show_completed_models(completed_models)
     数中调用另一个函数，这有助于将复杂的任务划分成一系列的步骤。
 '''
 
+'''
+        # 禁止函数修改列表
+        我们创建了一个未打印的设计列表，还创建了一个空列表，用于存储打印好的模型。接下来，
+    由于我们已经定义了两个函数，因此只需调用它们并传入正确的实参即可。我们调用
+    print_models()并向它传递两个列表；像预期的一样，print_models()模拟打印设计的过程。接
+    下来，我们调用show_completed_models()，并将打印好的模型列表传递给它，让其能够指出打印
+    了哪些模型。描述性的函数名让别人阅读这些代码时也能明白，虽然其中没有任何注释。
+    相比于没有使用函数的版本，这个程序更容易扩展和维护。如果以后需要打印其他设计，
+    只需再次调用print_models()即可。如果我们发现需要对打印代码进行修改，只需修改这些代码
+    一次，就能影响所有调用该函数的地方；
+        function_name(list_name[:])
+        切片表示法[:]创建列表的副本。在程序中，如果不想清空未打印的设计列表，可像下面这样
+    调用print_models()：
+        print_models(unprinted_designs[:], completed_models)
+        这样函数print_models()依然能够完成其工作，因为它获得了所有未打印的设计的名称，但
+    它使用的是列表unprinted_designs的副本，而不是列表unprinted_designs本身。像以前一样，列
+    表completed_models也将包含打印好的模型的名称，但函数所做的修改不会影响到列表
+    unprinted_designs。
+    虽然向函数传递列表的副本可保留原始列表的内容，但除非有充分的理由需要传递副本，否
+    则还是应该将原始列表传递给函数，因为让函数使用现成列表可避免花时间和内存创建副本，从
+    而提高效率，在处理大型列表时尤其如此。
+'''
 ######################################################################################################################################################################################################
+
+def print_models(unprinted_designs, completed_models):
+
+    #   模拟打印每个设计，直到没有未打印的设计为止
+    #   打印每个设计后，都将其移到列表completed_models中
+    while unprinted_designs:
+        current_design = unprinted_designs.pop()
+        
+        # 模拟根据设计制作3D打印模型的过程
+        print("Printing model: " + current_design)
+        completed_models.append(current_design)
+
+
+def show_completed_models(completed_models):
+    
+    #   显示打印好的所有模型
+    print("\nThe following models have been printed:")
+
+    for completed_model in completed_models:
+        print(completed_model)
+    
+unprinted_designs = ['iphone case', 'robot pendant', 'dodecahedron']
+completed_models = []
+
+print_models(unprinted_designs[:], completed_models)
+show_completed_models(completed_models)
+print(unprinted_designs)
+print(completed_models)
+
+
+
+######################################################################################################################################################################################################
+
+'''
+    # 传递任意数量的实参
+    有时候，你预先不知道函数需要接受多少个实参，好在Python允许函数从调用语句中收集任
+意数量的实参。
+例如，来看一个制作比萨的函数，它需要接受很多配料，但你无法预先确定顾客要多少种配
+料。下面的函数只有一个形参*toppings，但不管调用语句提供了多少实参，这个形参都将它们
+统统收入囊中：
+'''
+
+def make_pizza(*toppings):
+
+    """打印顾客点的所有配料"""
+    print(toppings)
+
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')
+
+'''
+        形参名*toppings中的星号让Python创建一个名为toppings的空元组，并将收到的所有值都封
+    装到这个元组中。函数体内的print语句通过生成输出来证明Python能够处理使用一个值调用函
+    数的情形，也能处理使用三个值来调用函数的情形。它以类似的方式处理不同的调用，注意，
+    Python将实参封装到一个元组中，即便函数只收到一个值也如此：
+'''
+
+def make_pizza(*toppings):
+    """概述要制作的比萨""" 
+    print("\nMaking a pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
+
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')
+
+#   不管函数收到的实参是多少个，这种语法都管用。
+
+######################################################################################################################################################################################################
+
+
+######################################################################################################################################################################################################
+
+'''
+    # 结合使用位置实参和任意数量实参
+    如果要让函数接受不同类型的实参，必须在函数定义中将接纳任意数量实参的形参放在最
+后。Python先匹配位置实参和关键字实参，再将余下的实参都收集到最后一个形参中。
+
+'''
+'''
+    例如，如果前面的函数还需要一个表示比萨尺寸的实参，必须将该形参放在形参*toppings
+的前面：
+'''
+def make_pizza(size, *toppings):
+    """概述要制作的比萨"""
+    print("\nMaking a " + str(size) +
+        "-inch pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
+
+make_pizza(16, 'pepperoni')
+make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+
+'''
+        形参名*toppings中的星号让Python创建一个名为toppings的空元组，并将收到的所有值都封
+    装到这个元组中。函数体内的print语句通过生成输出来证明Python能够处理使用一个值调用函
+    数的情形，也能处理使用三个值来调用函数的情形。它以类似的方式处理不同的调用，注意，
+    Python将实参封装到一个元组中，即便函数只收到一个值也如此：
+'''
+
+def make_pizza(*toppings):
+    """概述要制作的比萨""" 
+    print("\nMaking a pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
+
+make_pizza('pepperoni')
+make_pizza('mushrooms', 'green peppers', 'extra cheese')
+
+#   不管函数收到的实参是多少个，这种语法都管用。
+
+######################################################################################################################################################################################################
+
+
+######################################################################################################################################################################################################
+
+'''
+    # 结合使用位置实参和任意数量实参
+    如果要让函数接受不同类型的实参，必须在函数定义中将接纳任意数量实参的形参放在最
+后。Python先匹配位置实参和关键字实参，再将余下的实参都收集到最后一个形参中。
+
+'''
+'''
+    例如，如果前面的函数还需要一个表示比萨尺寸的实参，必须将该形参放在形参*toppings
+的前面：
+'''
+def make_pizza(size, *toppings):
+    """概述要制作的比萨"""
+    print("\nMaking a " + str(size) +
+        "-inch pizza with the following toppings:")
+    for topping in toppings:
+        print("- " + topping)
+
+make_pizza(16, 'pepperoni')
+make_pizza(12, 'mushrooms', 'green peppers', 'extra cheese')
+
+'''
+    基于上述函数定义，Python将收到的第一个值存储在形参size中，并将其他的所有值都存储
+在元组toppings中。在函数调用中，首先指定表示比萨尺寸的实参，然后根据需要指定任意数量
+的配料。
+    现在，每个比萨都有了尺寸和一系列配料，这些信息按正确的顺序打印出来了——首先是尺
+寸，然后是配料
+'''
+
+######################################################################################################################################################################################################
+
+
+
 
 
 
