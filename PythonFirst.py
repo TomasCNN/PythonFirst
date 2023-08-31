@@ -703,6 +703,10 @@ from copy import copy
 #for language in set(favorite_languages.values()):
 #    print(language.title())
 
+a = 3
+print(a)
+b = 3.1412926
+print(math.floor(b))
 
 ##   通过对包含重复元素的列表调用set()，可让python找出列表中独一无二的元素，并使用这些元素来创建一个集合。
 ##   我们使用了set()来提取favorite_languages.values()中不同的语言。结果是一个不重复的列表。
@@ -726,6 +730,7 @@ from copy import copy
 #for alien in aliens:
 #    print(alien)
 
+print(favorite_language.strip())          # strip()删除字符串两端的空白
 
 #######################################################################################################################################################################################################
 
@@ -755,8 +760,19 @@ from copy import copy
 
 #######################################################################################################################################################################################################
 
+import this
 
+bicycles = ['trek', 'cannondale', 'redline', 'specialized']
+print(bicycles[0])
+print(bicycles[0].title())
 
+knames = ['ron', 'tyler', 'dani'] 
+msg = f"Hello, {knames[0].title()}!"
+print(msg) 
+msg = f"Hello, {knames[1].title()}!" 
+print(msg) 
+msg = f"Hello, {knames[2].title()}!" 
+print(msg)
 
 #######################################################################################################################################################################################################
 #'''
@@ -1784,16 +1800,68 @@ def function_name(
 
 
 
+list.append('Google')
+print(list)
 
 
+temp = ['Doc','Exe','Excel','Pro','Outlook']
+list.extend(temp)
+list.extend(['Doc','Exe','Excel','Pro','Outlook'])
+print(list)
 
+list[12:17] = []
+print(list)
 
+list[6:12] = []
+print(list)
 
+list.insert(0,5)
+list.insert(2,15)
+list.insert(4,25)
+list.insert(6,35)
+list.insert(8,45)
+list.insert(10,55)
+list.insert(12,65)
+list1 = list
+list2 = copy(list)
 
+if list1 is list:
+    print(list1 is list)
+    print('list\'s Type is:',type(list))
+    print('list\'s ID is:',id(list))
+    print('list\'s Value is:',list)
+    print('list1\'s Type is:',type(list1))
+    print('list1\'s ID is:',id(list1))
+    print('list1\'s Value is:',list1)
 
+if list2 is not list:
+    print(list2 is list)
+    print('list\'s Type is:',type(list))
+    print('list\'s ID is:',id(list))
+    print('list\'s Value is:',list)
+    print('list2\'s Type is:',type(list2))
+    print('list2\'s ID is:',id(list2))
+    print('list2\'s Value is:',list2)
 
+print(list)
 
+for i in range(0,7):
+    if list[i] % 2 != 0:
+        del list[i] 
+print(list)
 
+for j in range(0,7):
+    if list2[j] % 2 == 0:
+        del list2[j] 
+print(list2)
 
+motorcycles = ['honda', 'yamaha', 'suzuki']
+print(motorcycles)
+popped_motorcycle = motorcycles.pop()
+print(motorcycles)
+print(popped_motorcycle)
 
+#如果你不确定该使用del语句还是pop()方法，下面是一个简单的判断标准：如果你要从列表
+#中删除一个元素，且不再以任何方式使用它，就使用del语句；如果你要在删除元素后还能继续
+#使用它，就使用方法pop()。
 
