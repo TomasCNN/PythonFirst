@@ -1870,16 +1870,575 @@ roll_over()，即便是从未见过的代码块，我们也能够轻松地推断
 性的值，我们使用了self.make、self.model和self.year。在处，我们根据Car类创建了一个实
 例，并将其存储到变量my_new_car中。接下来，我们调用方法get_descriptive_name()，指出我
 们拥有的是一辆什么样的汽车：
-2016 Audi A4
-为让这个类更有趣，下面给它添加一个随时间变化的属性，它存储汽车的总里程。
+    2016 Audi A4
+    为让这个类更有趣，下面给它添加一个随时间变化的属性，它存储汽车的总里程。
 
+    # 给属性指定默认值
+    类中的每个属性都必须有初始值，哪怕这个值是0或空字符串。在有些情况下，如设置默认
+值时，在方法__init__()内指定这种初始值是可行的；如果你对某个属性这样做了，就无需包含
+为它提供初始值的形参。
+    下面来添加一个名为odometer_reading的属性，其初始值总是为0。我们还添加了一个名为
+read_odometer()的方法，用于读取汽车的里程表：
+    class Car():
+        def __init__(self, make, model, year):
+            """初始化描述汽车的属性"""
 
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            """返回整洁的描述性信息"""
+
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            """打印一条指出汽车里程的消息"""
+
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+    my_new_car = Car('audi', 'a4', 2016)
+    print(my_new_car.get_descriptive_name())
+    my_new_car.read_odometer()
+    
+    现在，当Python调用方法__init__()来创建新实例时，将像前一个示例一样以属性的方式存
+储制造商、型号和生产年份。接下来，Python将创建一个名为odometer_reading的属性，并将其
+初始值设置为0（见“self.odometer_reading = 0”）。在“def read_odometer(self):”处，
+我们还定义了一个名为read_odometer()的方法，它让你能够轻松地获悉汽车的里程。
+一开始汽车的里程为0：
+    2016 Audi A4
+    This car has 0 miles on it.
+    出售时里程表读数为0的汽车并不多，因此我们需要一个修改该属性的值的途径。
+    
+    # 修改属性的值
+    可以以三种不同的方式修改属性的值：直接通过实例进行修改；通过方法进行设置；通过方
+法进行递增（增加特定的值）。下面依次介绍这些方法。
+    # 直接修改属性的值
+    要修改属性的值，最简单的方式是通过实例直接访问它。下面的代码直接将里程表读数设置
+为23：
+    class Car():
+        def __init__(self, make, model, year):
+            """初始化描述汽车的属性"""
+
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            """返回整洁的描述性信息"""
+
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            """打印一条指出汽车里程的消息"""
+
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+    my_new_car = Car('audi', 'a4', 2016)
+    print(my_new_car.get_descriptive_name())
+    my_new_car.odometer_reading = 23
+    my_new_car.read_odometer()
+
+    在“my_new_car.odometer_reading = 23”处，我们使用句点表示法来直接访问并设置汽车的属性odometer_reading。这行代码让
+Python在实例my_new_car中找到属性odometer_reading，并将该属性的值设置为23：
+    2016 Audi A4
+    This car has 23 miles on it.
+    有时候需要像这样直接访问属性，但其他时候需要编写对属性进行更新的方法。
+    # 通过方法修改属性的值
+    如果有替你更新属性的方法，将大有裨益。这样，你就无需直接访问属性，而可将值传递给
+一个方法，由它在内部进行更新。
+    下面的示例演示了一个名为update_odometer()的方法：
+     class Car():
+        def __init__(self, make, model, year):
+            """初始化描述汽车的属性"""
+
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            """返回整洁的描述性信息"""
+
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            """打印一条指出汽车里程的消息"""
+
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            """将里程表读数设置为指定的值"""
+
+            self.odometer_reading = mileage
+
+    my_new_car = Car('audi', 'a4', 2016)
+    print(my_new_car.get_descriptive_name())
+    my_new_car.update_odometer(23)
+    my_new_car.read_odometer()
+
+    对Car类所做的唯一修改是在“def update_odometer(self, mileage):”处添加了方法update_odometer()。这个方法接受一个里程值，
+并将其存储到self.odometer_reading中。在“ my_new_car.update_odometer(23)”处，我们调用了update_odometer()，并向它提供了
+实参23（该实参对应于方法定义中的形参mileage）。它将里程表读数设置为23；而方法
+    read_odometer()打印该读数：
+    2016 Audi A4
+    This car has 23 miles on it.
+    可对方法update_odometer()进行扩展，使其在修改里程表读数时做些额外的工作。下面来添
+加一些逻辑，禁止任何人将里程表读数往回调：
+    
+    class Car():
+        def __init__(self, make, model, year):
+            """初始化描述汽车的属性"""
+
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            """返回整洁的描述性信息"""
+
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            """打印一条指出汽车里程的消息"""
+
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            """
+                将里程表读数设置为指定的值
+                禁止将里程表读数往回调
+            """
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+    my_new_car = Car('audi', 'a4', 2016)
+    print(my_new_car.get_descriptive_name())
+    my_new_car.update_odometer(23)
+    my_new_car.read_odometer()
+
+    现在，update_odometer()在修改属性前检查指定的读数是否合理。如果新指定的里程
+（mileage）大于或等于原来的里程（self.odometer_reading），就将里程表读数改为新指定的里
+程（见“ if mileage >= self.odometer_reading:”）；否则就发出警告，指出不能将里程表往
+回拨（见“print("You can't roll back an odometer!")”）。
+
+    # 通过方法对属性的值进行递增
+    有时候需要将属性值递增特定的量，而不是将其设置为全新的值。假设我们购买了一辆二手
+车，且从购买到登记期间增加了100英里的里程，下面的方法让我们能够传递这个增量，并相应
+地增加里程表读数：
+    class Car():
+        def __init__(self, make, model, year):
+            """初始化描述汽车的属性"""
+
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            """返回整洁的描述性信息"""
+
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            """打印一条指出汽车里程的消息"""
+
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            """
+                将里程表读数设置为指定的值
+                禁止将里程表读数往回调
+            """
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+        def increment_odometer(self, miles):
+            """将里程表读数增加指定的量"""
+
+            self.odometer_reading += miles
+
+    my_used_car = Car('subaru', 'outback', 2013)
+    print(my_used_car.get_descriptive_name())
+    my_used_car.update_odometer(23500)
+    my_used_car.read_odometer()
+  my_used_car.increment_odometer(100)
+    my_used_car.read_odometer()
+    
+    在“ def increment_odometer(self, miles):”处，新增的方法increment_odometer()
+接受一个单位为英里的数字，并将其加入到self.odometer_reading中。在“my_used_car = Car('subaru', 'outback', 2013)”处，
+我们创建了一辆二手车——my_used_car。在“my_used_car.update_odometer(23500)”处，我们调用方法update_odometer()并传
+入23500，将这辆二手车的里程表读数设置为23 500。在“my_used_car.increment_odometer(100)”处，我们调用increment_odometer()
+并传入100，以增加从购买到登记期间行驶的100英里：
+    2013 Subaru Outback
+    This car has 23500 miles on it.
+    This car has 23600 miles on it.
+    你可以轻松地修改这个方法，以禁止增量为负值，从而防止有人利用它来回拨里程表。
+
+    注意 你可以使用类似于上面的方法来控制用户修改属性值（如里程表读数）的方式，但能够
+访问程序的人都可以通过直接访问属性来将里程表修改为任何值。要确保安全，除了进
+行类似于前面的基本检查外，还需特别注意细节。
 
 '''
 
 ######################################################################################################################################################################################################
 
 
+######################################################################################################################################################################################################
+
+'''
+    # 继承
+    编写类时，并非总是要从空白开始。如果你要编写的类是另一个现成类的特殊版本，可使用
+继承。一个类继承另一个类时，它将自动获得另一个类的所有属性和方法；原有的类称为父类，
+而新类称为子类。子类继承了其父类的所有属性和方法，同时还可以定义自己的属性和方法。
+    # 子类的方法__init__()
+    创建子类的实例时，Python首先需要完成的任务是给父类的所有属性赋值。为此，子类的方
+法__init__()需要父类施以援手。
+    例如，下面来模拟电动汽车。电动汽车是一种特殊的汽车，因此我们可以在前面创建的Car
+类的基础上创建新类ElectricCar，这样我们就只需为电动汽车特有的属性和行为编写代码。
+    下面来创建一个简单的ElectricCar类版本，它具备Car类的所有功能：
+    
+    electric_car.py
+
+    class Car():
+        """一次模拟汽车的简单尝试"""
+
+        def __init__(self, make, model, year):
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+        def increment_odometer(self, miles):
+                self.odometer_reading += miles
+
+    class ElectricCar(Car):
+        """电动汽车的独特之处"""
+ 
+    def __init__(self, make, model, year):
+        """初始化父类的属性"""
+
+        super().__init__(make, model, year)
+
+    my_tesla = ElectricCar('tesla', 'model s', 2016)
+    print(my_tesla.get_descriptive_name())
+
+    首先是Car类的代码（见“class Car():”）。创建子类时，父类必须包含在当前文件中，
+且位于子类前面。在“class ElectricCar(Car):”处，我们定义了子类ElectricCar。定义子
+类时，必须在括号内指定父类的名称。方法__init__()接受创建Car实例所需的信息（见
+“def __init__(self, make, model, year):”）。
+    “super().__init__(make, model, year)”处的super()是一个特殊函数，帮助Python将
+父类和子类关联起来。这行代码让Python调用ElectricCar的父类的方法__init__()，
+让ElectricCar实例包含父类的所有属性。父类也称为超类（superclass），名称super因此而得名。
+    为测试继承是否能够正确地发挥作用，我们尝试创建一辆电动汽车，但提供的信息与创建普
+通汽车时相同。在“ my_tesla = ElectricCar('tesla', 'model s', 2016)”处，我们创建
+ElectricCar类的一个实例，并将其存储在变量my_tesla中。这行代码调用ElectricCar类中定义的
+方法__init__()，后者让Python调用父类Car中定义的方法__init__()。我们提供了实参'tesla'、
+'model s'和2016。
+    除方法__init__()外，电动汽车没有其他特有的属性和方法。当前，我们只想确认电动汽车
+具备普通汽车的行为：
+    2016 Tesla Model S
+    ElectricCar实例的行为与Car实例一样，现在可以开始定义电动汽车特有的属性和方法了。
+
+    # Python 2.7 中的继承
+    在Python 2.7中，继承语法稍有不同，ElectricCar类的定义类似于下面这样：
+    
+    class Car(object):
+        """一次模拟汽车的简单尝试"""
+
+        def __init__(self, make, model, year):
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+        def increment_odometer(self, miles):
+            self.odometer_reading += miles
+
+    class ElectricCar(Car):
+        def __init__(self, make, model, year):
+            super(ElectricCar, self).__init__(make, model, year)
+
+    my_tesla = ElectricCar('tesla', 'model s', 2016)
+    print(my_tesla.get_descriptive_name())
+    函数super()需要两个实参：子类名和对象self。为帮助Python将父类和子类关联起来，这些
+实参必不可少。另外，在Python 2.7中使用继承时，务必在定义父类时在括号内指定object。
+
+    # 给子类定义属性和方法
+    让一个类继承另一个类后，可添加区分子类和父类所需的新属性和方法。
+    下面来添加一个电动汽车特有的属性（电瓶），以及一个描述该属性的方法。我们将存储电
+瓶容量，并编写一个打印电瓶描述的方法：
+    class Car():
+        """一次模拟汽车的简单尝试"""
+
+        def __init__(self, make, model, year):
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+        def increment_odometer(self, miles):
+            self.odometer_reading += miles
+
+    class ElectricCar(Car):
+        """Represent aspects of a car, specific to electric vehicles."""
+
+        def __init__(self, make, model, year):
+            """
+                电动汽车的独特之处
+                初始化父类的属性，再初始化电动汽车特有的属性
+            """
+            
+            super().__init__(make, model, year)
+          self.battery_size = 70
+
+        def describe_battery(self):
+            """打印一条描述电瓶容量的消息"""
+
+            print("This car has a " + str(self.battery_size) + "-kWh battery.")
+
+    my_tesla = ElectricCar('tesla', 'model s', 2016)
+    print(my_tesla.get_descriptive_name())
+    my_tesla.describe_battery()
+    在“self.battery_size = 70”处，我们添加了新属性self.battery_size，并设置其初始值（如70）。根据ElectricCar 类
+创建的所有实例都将包含这个属性，但所有Car实例都不包含它。在“def describe_battery(self):”处，我们还添加了一个名
+为describe_battery()的方法，它打印有关电瓶的信息。我们调用这个方法时，将看到一条电动
+汽车特有的描述：
+    2016 Tesla Model S
+    This car has a 70-kWh battery.
+    对于ElectricCar类的特殊化程度没有任何限制。模拟电动汽车时，你可以根据所需的准确
+程度添加任意数量的属性和方法。如果一个属性或方法是任何汽车都有的，而不是电动汽车特有
+的，就应将其加入到Car类而不是ElectricCar类中。这样，使用Car类的人将获得相应的功能，而
+ElectricCar类只包含处理电动汽车特有属性和行为的代码。
+
+    # 重写父类的方法
+    对于父类的方法，只要它不符合子类模拟的实物的行为，都可对其进行重写。为此，可在子
+类中定义一个这样的方法，即它与要重写的父类方法同名。这样，Python将不会考虑这个父类方
+法，而只关注你在子类中定义的相应方法。
+假设Car类有一个名为fill_gas_tank()的方法，它对全电动汽车来说毫无意义，因此你可能
+想重写它。下面演示了一种重写方式：
+    class Car():
+        """一次模拟汽车的简单尝试"""
+
+        def __init__(self, make, model, year):
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+        def increment_odometer(self, miles):
+            self.odometer_reading += miles
+
+        def fill_gas_tank(self):
+            """电动汽车没有油箱"""
+
+            print("This car needs a gas tank!")
+
+
+   class ElectricCar(Car):
+        """Represent aspects of a car, specific to electric vehicles."""
+
+        def __init__(self, make, model, year):
+            """
+                电动汽车的独特之处
+                初始化父类的属性，再初始化电动汽车特有的属性
+            """
+            
+            super().__init__(make, model, year)
+          self.battery_size = 70
+
+        def describe_battery(self):
+            """打印一条描述电瓶容量的消息"""
+
+            print("This car has a " + str(self.battery_size) + "-kWh battery.")
+
+        def fill_gas_tank(self):
+            """电动汽车没有油箱"""
+
+            print("This car doesn't need a gas tank!")
+
+    my_tesla = ElectricCar('tesla', 'model s', 2016)
+    print(my_tesla.get_descriptive_name())
+    my_tesla.describe_battery()
+    my_tesla.fill_gas_tank()
+
+    现在，如果有人对电动汽车调用方法fill_gas_tank()， Python将忽略Car类中的方法
+fill_gas_tank()，转而运行上述代码。使用继承时，可让子类保留从父类那里继承而来的精华，
+并剔除不需要的糟粕。
+
+    # 将实例用作属性
+    使用代码模拟实物时，你可能会发现自己给类添加的细节越来越多：属性和方法清单以及文
+件都越来越长。在这种情况下，可能需要将类的一部分作为一个独立的类提取出来。你可以将大
+型类拆分成多个协同工作的小类。
+    例如，不断给ElectricCar类添加细节时，我们可能会发现其中包含很多专门针对汽车电瓶
+的属性和方法。在这种情况下，我们可将这些属性和方法提取出来，放到另一个名为Battery的
+类中，并将一个Battery实例用作ElectricCar类的一个属性：
+    
+    class Car():
+        """一次模拟汽车的简单尝试"""
+
+        def __init__(self, make, model, year):
+            self.make = make
+            self.model = model
+            self.year = year
+            self.odometer_reading = 0
+
+        def get_descriptive_name(self):
+            long_name = str(self.year) + ' ' + self.make + ' ' + self.model
+            return long_name.title()
+
+        def read_odometer(self):
+            print("This car has " + str(self.odometer_reading) + " miles on it.")
+
+        def update_odometer(self, mileage):
+            if mileage >= self.odometer_reading:
+                self.odometer_reading = mileage
+            else:
+                print("You can't roll back an odometer!")
+
+        def increment_odometer(self, miles):
+            self.odometer_reading += miles
+
+        def fill_gas_tank(self):
+            """电动汽车没有油箱"""
+
+            print("This car needs a gas tank!")
+
+    class Battery():
+        """一次模拟电动汽车电瓶的简单尝试"""
+
+        def __init__(self, battery_size=70):
+            """初始化电瓶的属性"""
+
+            self.battery_size = battery_size
+
+        def describe_battery(self):
+            """打印一条描述电瓶容量的消息"""
+
+            print("This car has a " + str(self.battery_size) + "-kWh battery.")
+
+    class ElectricCar(Car):
+        """电动汽车的独特之处"""
+
+        def __init__(self, make, model, year):
+            """
+                初始化父类的属性，再初始化电动汽车特有的属性
+            """
+
+        super().__init__(make, model, year)
+        self.battery = Battery()
+
+    my_tesla = ElectricCar('tesla', 'model s', 2016)
+    print(my_tesla.get_descriptive_name())
+    my_tesla.battery.describe_battery()
+
+    在“class Battery():”处，我们定义了一个名为Battery的新类，它没有继承任何类。
+“def __init__(self, battery_size=70)”处的方法__init__()除self外，还有另一个形参
+battery_size。这个形参是可选的：如果没有给它提供值，电瓶容量将被设置为70。方法
+describe_battery()也移到了这个类中（见“def describe_battery(self):”）。
+    在ElectricCar类中，我们添加了一个名为self.battery的属性（见“self.battery = Battery()”）。这行代码让Python
+创建一个新的Battery实例（由于没有指定尺寸，因此为默认值70），并将该实例存储在属性
+self.battery中。每当方法__init__()被调用时，都将执行该操作；因此现在每个ElectricCar实
+例都包含一个自动创建的Battery实例。
+    我们创建一辆电动汽车，并将其存储在变量my_tesla中。要描述电瓶时，需要使用电动汽车
+的属性battery：
+    my_tesla.battery.describe_battery()
+    这行代码让Python在实例my_tesla中查找属性battery，并对存储在该属性中的Battery实例
+调用方法describe_battery()。
+    输出与我们前面看到的相同：
+    2016 Tesla Model S
+    This car has a 70-kWh battery.
+    这看似做了很多额外的工作，但现在我们想多详细地描述电瓶都可以，且不会导致ElectricCar
+类混乱不堪。下面再给Battery类添加一个方法，它根据电瓶容量报告汽车的续航里程：
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
+
+######################################################################################################################################################################################################
 
 
 
